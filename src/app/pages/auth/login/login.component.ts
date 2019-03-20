@@ -5,15 +5,16 @@ import { FuseConfigService } from '@fuse/services/config.service';
 import { fuseAnimations } from '@fuse/animations';
 import { LoginService } from 'app/services/auth/login.service';
 
-
 import { ToastrService } from 'ngx-toastr';
 import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-bar.service';
+
 
 @Component({
     selector     : 'login',
     templateUrl  : './login.component.html',
     styleUrls    : ['./login.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    animations   : fuseAnimations
 })
 export class LoginComponent implements OnInit
 {
@@ -71,6 +72,7 @@ export class LoginComponent implements OnInit
             password: ['', Validators.required]
         });
     }
+
     loginUser(){
         this.loading = true;
         this.errorMessage = '';

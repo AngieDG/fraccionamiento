@@ -2,20 +2,25 @@
 
     $background: map-get($theme, background);
     $foreground: map-get($theme, foreground);
+    $accent: map-get($theme, accent);
     $is-dark: map-get($theme, is-dark);
 
     login {
 
         #login {
 
+            #login-intro {
+                color: white;
+            }
+
             #login-form-wrapper {
+                @if ($is-dark) {
+                    background: mat-color($fuse-navy, 600);
+                } @else {
+                    background: map-get($background, card);
+                }
 
                 #login-form {
-                    @if ($is-dark) {
-                        background: mat-color($fuse-navy, 600);
-                    } @else {
-                        background: map-get($background, card);
-                    }
 
                     .separator {
                         color: map-get($foreground, divider);

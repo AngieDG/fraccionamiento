@@ -81,7 +81,30 @@ export class LoginService {
       }
   }
 
- 
+  // Build a permissions tree from current identity
+  _makePermissionsTree(){
+
+      // If permissions doesn't exists
+      if(!this._permissions_slugs)
+          return;
+      
+
+      // Sort permissions as a tree in a local variable
+      this._permissions_slugs.forEach(element => {
+          if(element){
+              var perm = element.split('-');
+              if(!this._permissions[perm[0]])
+                  this._permissions[perm[0]] = [];
+              if(!this._permissions[perm[0]][perm[1]])
+                  this._permissions[perm[0]][perm[1]] = [];
+              if(this._permissions[perm[0]][perm[1]].indexOf(perm[2]) == -1)
+                  this._permissions[perm[0]][perm[1]].push(perm[2]);
+          }
+      });
+
+  }
+
+
   // Make a login request
   doLogin(userdata: any) {
       return this.http.post(`${environment.apiUrl}auth/login`, userdata).map( extractData );
@@ -120,6 +143,8 @@ export class LoginService {
               if(data['valid']){
                   this.setIdentity(data['user']);
                   this._permissions_slugs = data['_permissions'];
+                  this._makePermissionsTree();
+                 // this.get_extra_appdata();
                   return true;
               } else {
                   this.doLogout();
@@ -149,6 +174,60 @@ export class LoginService {
           setTimeout( () => {
               this.router.navigate(['/admin']);
           }, 300);
+      }
+  }
+
+  // Validate if a permission or array of permissions are in current permissions variable
+  hasPermission(perms:any): boolean{
+      // initialize context variable
+      var to_validate : string[] = [];
+      // If permission is string, convert to array
+      if(typeof(perms)=='string'){
+          to_validate.push(perms);
+      }
+      // If permission is array, copy to local variable
+      if(typeof(perms)=='object'){
+          to_validate = perms;
+      }
+
+      // Filter permissions slugs that are in stored in local
+      let authorized = to_validate.filter( (el) => {
+          return (this._permissions_slugs.indexOf(el)>-1);
+      });
+      
+      // return true if user has one or more permissions
+      return authorized.length>0;
+  }
+
+  
+
+  // Validate if user has permissions to a module, a component or activity based on the permissions tree
+  validatePermissionTree(module:string,component?:string,activity?:string):boolean{
+      // Validate if module permission exists
+      if(this._permissions[module]){
+          // Validate if component validation is defined
+          if(component){
+              //Validate if component permission exists
+              if(this._permissions[module][component]){
+                  // Validate if activity validation is defined
+                  if(activity){
+                      // Validate if activity permission exists
+                      if(this._permissions[module][component].indexOf(activity)>-1){
+                          return true;
+                      } else {
+                          return false;
+                      }
+                  } else {
+                      return true;
+                  }
+              } else {
+                  return false;
+              }
+          } else {
+              return true;
+          }
+      } else {
+          return false;
       }
   }
 

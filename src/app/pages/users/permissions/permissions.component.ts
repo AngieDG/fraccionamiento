@@ -29,7 +29,7 @@ export class UserPermissionsComponent implements OnInit {
 
 
   constructor( 
-   // public loginService: LoginService,
+    public loginService: LoginService,
     private route: ActivatedRoute,
     private roleService: RoleService,
     private permissionsService: PermissionsService,
@@ -46,9 +46,7 @@ export class UserPermissionsComponent implements OnInit {
    }
 
   ngOnInit() {
-    //if (!this.loginService.hasPermission(['user-permissions-read'])){
-    
-    //}
+  
     this._fuseProgressBarService.show();
     this.roleService.getRoleById(this._id).subscribe((response) => {
         this.current_role = response;
@@ -56,8 +54,6 @@ export class UserPermissionsComponent implements OnInit {
     },
     (error) => {
       this._fuseProgressBarService.hide();
-      //this.loginService.displayMessage('Ha ocurrido un error al cargar la información');
-     // this.loginService.goBack();
       console.log(error);
     });
 
@@ -65,8 +61,6 @@ export class UserPermissionsComponent implements OnInit {
        this.permissions = response; 
     },
     (error) => {
-      //this.loginService.displayMessage('Ha ocurrido un error al cargar la información');
-      //this.loginService.goBack();
       console.log(error);
     });
   
@@ -85,25 +79,18 @@ export class UserPermissionsComponent implements OnInit {
   }
 
   saveRole(){
-    //if(!this.loginService.hasPermission(['user-permissions-update'])){ 
-      //return this.loginService.displayMessage('Usuario no autorizado.');
-   // }
+
     this._fuseProgressBarService.show();
     this.roleService.saveOrUpdate(this.current_role).subscribe(
       (response) => {
           this._fuseProgressBarService.hide();
           if  (response.message){
-            //this.loginService.displayMessage("Ha ocurrido un error al actualizar el rol.");
             console.log( response );
-          }  
-          /*else{
-            this.loginService.displayMessage("El rol ha sido actualizado.");
-            this.loginService.goBack();
-          }*/
+          }  else{
+          }
       },
       (error) => {
         this._fuseProgressBarService.hide();
-        //this.loginService.displayMessage("Ha ocurrido un error al actualizar el rol.");
         console.log(`Error: ${error} `);
    
       }
@@ -117,16 +104,11 @@ export class UserPermissionsComponent implements OnInit {
         (response) => {
             this._fuseProgressBarService.hide();
             if  (response.message){
-              //this.loginService.displayMessage("Ha ocurrido un error al eliminar el rol.");
               console.log(response.message);
-            } 
-            // else{
-              //this.loginService.displayMessage("El rol ha sido eliminado.");
-              //this.loginService.goBack();
-            //}
+            }  else{
+            }
         },
         (error) => {
-          //this.loginService.displayMessage("Ha ocurrido un error al eliminar el rol.");
           console.log(`Error: ${error} `);
         }
       );
