@@ -1,0 +1,64 @@
+<div class="page-layout carded fullwidth inner-scroll">
+
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg primary"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+
+        <!-- CONTENT HEADER -->
+        <div class="header primary p-24" fxLayout="row" fxLayoutAlign="start center">
+            <button mat-icon-button [routerLink]="'/admin/user/roles'"> 
+                <mat-icon>arrow_back_ios</mat-icon>
+            </button>
+            <h2 class="m-0">Roles & Permisos</h2>
+        </div>
+        <!-- / CONTENT HEADER -->
+
+
+
+        <!-- CONTENT CARD -->
+        <div class="content-card" *ngIf="role && current_role && loginService.hasPermission(['user-roles-update'])">
+
+            <!-- CONTENT TOOLBAR -->
+            <div class="toolbar px-24 py-8" fxLayout="row">
+
+                <mat-form-field fxFlex class="pt-16">
+                    <input matInput name="name" required autocomplete="off" placeholder="Nombre de rol" [(ngModel)]="current_role.name">
+                </mat-form-field>
+                <div fxFlex class="text-right">
+                    <button mat-icon-button color="primary" (click)="deleteRole()" *ngIf="loginService.hasPermission(['user-roles-delete'])">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                    <button mat-icon-button color="primary" (click)="saveRole()" *ngIf="loginService.hasPermission(['user-roles-update'])">
+                        <mat-icon>save</mat-icon>
+                    </button>
+                </div>
+
+            </div>
+            <!-- / CONTENT TOOLBAR -->
+
+            <!-- CONTENT -->
+            <div class="content p-24" fusePerfectScrollbar>
+
+
+                <form #roleForm="ngForm" fxLayout="column" fxLayoutAlign="start" *ngIf="current_role">
+                    <div fxLayout="row wrap" fxLayoutGap="10px">
+                        <div *ngFor="let per of permissions;  index as i" fxFlex="200px">
+                            <mat-checkbox [checked]="(current_role._permissions.indexOf(per._id)>=0) " (change)="addOrRemovePermission($event.checked,per._id)"><span class="mat-body-2">{{per.name}}</span></mat-checkbox>
+                        </div>
+                    </div>
+                </form>
+
+
+            </div>
+            <!-- / CONTENT -->
+
+        </div>
+        <!-- / CONTENT CARD -->
+
+    </div>
+    <!-- / CENTER -->
+
+</div>

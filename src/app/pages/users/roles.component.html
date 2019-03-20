@@ -1,0 +1,69 @@
+<div id="orders" class="page-layout carded fullwidth inner-scroll">
+
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg primary"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+
+        <!-- HEADER -->
+        <div class="header primary" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="space-between center">
+
+            <!-- APP TITLE -->
+            <div class="logo mb-24 mb-sm-0" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="logo-icon s-32 mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                    security
+                </mat-icon>
+                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">Roles</span>
+            </div>
+            <!-- / APP TITLE -->
+
+            <!-- SEARCH -->
+            <div fxFlex="25" class="search-wrapper  ml-sm-32" style="background-color: #fff; color: rgba(0,0,0,.54);">
+                <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+                    <mat-icon>search</mat-icon>
+                    <input #filter placeholder="Buscar" (keyup)="applyFilter($event.target.value)">
+                </div>
+            </div>
+            <!-- / SEARCH -->
+
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+
+            <mat-table #table [dataSource]="dataSource" [@animateStagger]="{value:'50'}" fusePerfectScrollbar>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="name">
+                    <mat-cell *matCellDef="let role">
+                        <p class="text-truncate">{{ role.name }}</p>
+                    </mat-cell>
+                </ng-container>
+
+
+                <!-- Btn Column -->
+                <ng-container matColumnDef="btn">
+                    <mat-cell *matCellDef="let role" fxLayoutAlign="end center">
+                    </mat-cell>
+                </ng-container>
+
+
+                <mat-row *matRowDef="let role; columns: displayedColumns;" matRipple [routerLink]="'/admin/user/roles/'+role._id">
+                </mat-row>
+            </mat-table>
+
+            <mat-paginator #paginator [pageSizeOptions]="[5, 10, 25, 100]">
+            </mat-paginator>
+
+            <button mat-fab class="float-bottom" (click)="addNewRole()">
+            <mat-icon aria-label="Agregar">add</mat-icon>
+          </button>
+
+        </div>
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>
