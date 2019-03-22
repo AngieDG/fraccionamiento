@@ -15,7 +15,9 @@ import { FuseProgressBarModule, FuseSidebarModule, FuseThemeOptionsModule } from
 
 import { fuseConfig } from 'app/fuse-config';
 
-
+// AUTH
+import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
+import { GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider} from "angularx-social-login";
 
  
 // Routing Module
@@ -31,6 +33,7 @@ import { LayoutModule } from 'app/layout/layout.module';
 import { SampleModule } from 'app/main/sample/sample.module';
 import { LoginModule } from 'app/pages/auth/login/login.module';
 import { UserModule } from 'app/pages/users/user.module';
+import { DashboardModule } from 'app/pages/dashboard/dashboard.module';
 
 
 
@@ -38,6 +41,24 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { AuthGuard } from 'app/pages/auth/auth.guard';
 
+let config = new AuthServiceConfig([
+    {
+      id: GoogleLoginProvider.PROVIDER_ID,
+      provider: new GoogleLoginProvider("Google-OAuth-Client-Id")
+    },
+    {
+      id: FacebookLoginProvider.PROVIDER_ID,
+      provider: new FacebookLoginProvider("Facebook-App-Id")
+    },
+    {
+      id: LinkedInLoginProvider.PROVIDER_ID,
+      provider: new LinkedInLoginProvider("LinkedIn-client-Id", false, 'en_US')
+    }
+  ]);
+   
+  export function provideConfig() {
+    return config;
+  }
 
 
 
@@ -74,16 +95,20 @@ import { AuthGuard } from 'app/pages/auth/auth.guard';
         LayoutModule,
         LoginModule,
         SampleModule,
-
+        DashboardModule,
         UserModule
     ],
     bootstrap   : [
         AppComponent
     ],
     providers: [
-      
-      LoginService
-      ]
+        AuthGuard,
+        {
+          provide: AuthServiceConfig,
+          useFactory: provideConfig
+        },
+        LoginService
+        ]
 })
 export class AppModule
 {

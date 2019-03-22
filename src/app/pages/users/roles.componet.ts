@@ -7,7 +7,7 @@ import { FuseUtils } from '@fuse/utils';
 import { RoleService } from 'app/services/roles/role.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-//import { LoginService } from 'app/services/auth/login.service';
+import { LoginService } from 'app/services/auth/login.service';
 import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-bar.service';
 
 @Component ({
@@ -36,13 +36,13 @@ export class UserRolesPermissionsComponent implements OnInit {
     public dialog: MatDialog,
     private router: Router,
     private _fuseProgressBarService: FuseProgressBarService,
-    //public loginService: LoginService
+    public loginService: LoginService
   ) { }
 
   ngOnInit() {
-    //if(!this.loginService.hasPermission(['user-roles-read'])){
+  if(!this.loginService.hasPermission(['user-roles-read'])){
       
-     //}
+  }
     this._fuseProgressBarService.show();
     this.rolService.getAll().subscribe((response) => { 
         if(response){
@@ -54,18 +54,20 @@ export class UserRolesPermissionsComponent implements OnInit {
             this._fuseProgressBarService.hide();
           },100);
         }
-        /* else{
+        
+        else{
           this.loginService.displayMessage('Ha ocurrido un error al obtener los roles');
           this.loginService.goBack();
-        } */
+        } 
+     
 
       }
-      /*,
+     ,
       (error) =>  {
-        this.loginService.displayMessage('Ha ocurrido un error al obtener los roles');
+        this.loginService.displayMessage('Ha ocurrido un error al obtener los roles 1');
         this.loginService.goBack();
         console.log(`Error ${error}`);
-      }*/
+      }
     );
   }
 

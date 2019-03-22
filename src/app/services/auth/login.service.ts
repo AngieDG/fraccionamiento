@@ -28,7 +28,7 @@ export class LoginService {
   token: string;
   build: Boolean = false;
   _permissions: any = [];
-  _permissions_slugs: any = [];
+ // _permissions_slugs: any = [];
   appData: any = {};
 
     constructor(
@@ -87,7 +87,7 @@ export class LoginService {
       // If permissions doesn't exists
       if(!this._permissions_slugs)
           return;
-      
+          console.log('HHHHHHHH');      
 
       // Sort permissions as a tree in a local variable
       this._permissions_slugs.forEach(element => {
@@ -240,7 +240,7 @@ export class LoginService {
       this.token = null;
       this.identity = null;
       this._permissions = [];
-      this._permissions_slugs = [];
+      //this._permissions_slugs = [];
       this.build = false;
       this.router.navigate(['/']);
       

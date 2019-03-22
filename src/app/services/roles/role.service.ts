@@ -5,20 +5,20 @@ import { Observable } from 'rxjs/Rx';
 import  {environment } from 'environments/environment';
 import { pipe } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { LoginService } from 'app/services/auth/login.service';
 
 
 @Injectable()
 export class RoleService {
 
     requestOptions : RequestOptions;
-    constructor(private http : Http ){
-    }
+   
 
-  /*
+
     constructor(private http : Http, loginService : LoginService){
         let headers = new Headers({'Authorization':loginService.getToken()});
         this.requestOptions = new RequestOptions({headers : headers});
-    } */
+    } 
 
     getAll() : Observable<Role[]> {
         return this.http.get(`${environment.apiUrl}user-role`, this.requestOptions)

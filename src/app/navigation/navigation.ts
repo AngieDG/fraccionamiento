@@ -20,6 +20,13 @@ export const navigation: FuseNavigation[] = [
                     bg       : '#F44336',
                     fg       : '#FFFFFF'
                 }
+            },
+            {
+                id      :'roles',
+                title   :'roles',
+                type    :'item',
+                icon   :'verified_user',
+                url     :'/users'
             }
         ]
     }
