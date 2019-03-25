@@ -32,6 +32,7 @@
         <!-- / HEADER -->
 
         <!-- CONTENT CARD -->
+
         <div class="content-card">
 
             <mat-table #table [dataSource]="dataSource" [@animateStagger]="{value:'50'}" fusePerfectScrollbar>
@@ -40,6 +41,7 @@
                 <ng-container matColumnDef="name">
                     <mat-cell *matCellDef="let role">
                         <p class="text-truncate">{{ role.name }}</p>
+
                     </mat-cell>
                 </ng-container>
 
@@ -58,7 +60,7 @@
             <mat-paginator #paginator [pageSizeOptions]="[5, 10, 25, 100]">
             </mat-paginator>
 
-            <button mat-fab class="float-bottom" *ngIf="loginService.hasPermission(['user-roles-create'])" (click)="addNewRole()">
+            <button mat-fab class="float-bottom" (click)="addNewRole()">
             <mat-icon aria-label="Agregar">add</mat-icon>
           </button>
 

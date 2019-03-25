@@ -9,12 +9,12 @@
 
     </mat-toolbar>
 
-    <div mat-dialog-content class="p-24 m-0" fusePerfectScrollbar *ngIf="loginService.hasPermission(['user-roles-read'])">
+    <div mat-dialog-content class="p-24 m-0" fusePerfectScrollbar >
         <form [formGroup]="contactForm">
 
             <div fxLayout="row" fxLayoutAlign="start start">
                 <mat-form-field fxFlex>
-                    <input name="name" formControlName="name" matInput type="text" autocomplete="off" placeholder="Nombre" required>
+                    <input name="name" formControlName="name" matInput type="text" autocomplete="off" placeholder="Nombre del rol" required>
                 </mat-form-field>
             </div>
 
@@ -22,7 +22,7 @@
 
 
     </div>
-    <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="space-between center" *ngIf="loginService.hasPermission(['user-roles-create','user-roles-update'])">
+    <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="space-between center" >
 
         <button *ngIf="action !=='edit'" mat-raised-button (click)="close(true)" class="save-button mat-accent" [disabled]="contactForm.invalid" aria-label="SAVE">
             GUARDAR

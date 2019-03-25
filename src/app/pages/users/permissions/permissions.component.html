@@ -19,7 +19,7 @@
 
 
         <!-- CONTENT CARD -->
-        <div class="content-card" *ngIf="role && current_role && loginService.hasPermission(['user-roles-update'])">
+        <div class="content-card" *ngIf="role && current_role">
 
             <!-- CONTENT TOOLBAR -->
             <div class="toolbar px-24 py-8" fxLayout="row">
@@ -28,10 +28,10 @@
                     <input matInput name="name" required autocomplete="off" placeholder="Nombre de rol" [(ngModel)]="current_role.name">
                 </mat-form-field>
                 <div fxFlex class="text-right">
-                    <button mat-icon-button color="primary" (click)="deleteRole()" *ngIf="loginService.hasPermission(['user-roles-delete'])">
+                    <button mat-icon-button color="primary" (click)="deleteRole()" *ngIf="">
                         <mat-icon>delete</mat-icon>
                     </button>
-                    <button mat-icon-button color="primary" (click)="saveRole()" *ngIf="loginService.hasPermission(['user-roles-update'])">
+                    <button mat-icon-button color="primary" (click)="saveRole()" *ngIf="">
                         <mat-icon>save</mat-icon>
                     </button>
                 </div>

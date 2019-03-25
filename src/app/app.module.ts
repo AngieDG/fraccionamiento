@@ -32,7 +32,7 @@ import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
 import { SampleModule } from 'app/main/sample/sample.module';
 import { LoginModule } from 'app/pages/auth/login/login.module';
-//import { UserModule } from 'app/pages/users/user.module';
+import { UserModule } from 'app/pages/users/user.module';
 import { DashboardModule } from 'app/pages/dashboard/dashboard.module';
 
 
@@ -96,7 +96,7 @@ let config = new AuthServiceConfig([
         LoginModule,
         SampleModule,
         DashboardModule,
-        //UserModule
+        UserModule
     ],
     bootstrap   : [
         AppComponent

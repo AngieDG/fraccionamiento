@@ -10,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 import { LoginService } from 'app/services/auth/login.service';
 import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-bar.service';
 import { UserRoleFormComponent } from './user-role-form/user-role-form.component';
+import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 
 
 
@@ -55,10 +56,12 @@ export class UserRolesPermissionsComponent implements OnInit {
             this.dataSource.paginator = this.paginator;
             this.dataSource.sort = this.sort;
             this._fuseProgressBarService.hide();
+            console.log(this.role + 'sdsass2');
           },100);
         }
         
         else{
+          console.log(this.role + 'sdsass1');
           this.loginService.displayMessage('Ha ocurrido un error al obtener los roles');
           this.loginService.goBack();
         } 
@@ -67,11 +70,16 @@ export class UserRolesPermissionsComponent implements OnInit {
       }
      ,
       (error) =>  {
-        this.loginService.displayMessage('Ha ocurrido un error al obtener los roles 1');
-        this.loginService.goBack();
+        console.log(this.role + 'sdsass');
+        this.loginService.displayMessage('Ha ocurrido un error al obtener los roles 1' );
+        //this.loginService.goBack();
         console.log(`Error ${error}`);     
       }
+    
     );
+    if(this.role = null ){
+    console.log('No existen datos');  
+    }
   }
 
   applyFilter(filterValue: string) {
@@ -106,9 +114,9 @@ export class UserRolesPermissionsComponent implements OnInit {
   }
 
   saveRole(role){
-    if (!this.loginService.hasPermission('users-role-create')){
-      return this.loginService.displayMessage('Usuario no autorizado.'); 
-    }
+   // if (!this.loginService.hasPermission('users-role-create')){
+     // return this.loginService.displayMessage('Usuario no autorizado.'); 
+    //}
     this.rolService.saveOrUpdate(role).subscribe(
       (role) => {
         this.loginService.displayMessage('El rol ha sido creado correctamente.');

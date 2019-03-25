@@ -21,22 +21,22 @@ export class RoleService {
     } 
 
     getAll() : Observable<Role[]> {
-        return this.http.get(`${environment.apiUrl}user-role`, this.requestOptions)
+        return this.http.get(`${environment.apiUrl}roles`, this.requestOptions)
             .map(mapRoles);
     }
     getRoleById(id : String) : Observable<Role>{
-    return this.http.get(`${environment.apiUrl}user-role/${id}`,this.requestOptions).pipe(
+    return this.http.get(`${environment.apiUrl}roles/${id}`,this.requestOptions).pipe(
         map( mapRole));    
     }
     saveOrUpdate(role: Role) : Observable<any> {
         if(role._id)
-            return this.http.patch(`${environment.apiUrl}user-role/${role._id}`, role, this.requestOptions).map( extractData );
+            return this.http.patch(`${environment.apiUrl}roles/${role._id}`, role, this.requestOptions).map( extractData );
         else
-            return this.http.post(`${environment.apiUrl}user-role`, role, this.requestOptions).map( extractData );
+            return this.http.post(`${environment.apiUrl}roles`, role, this.requestOptions).map( extractData );
     }
     delete(role: Role) : Observable<any> {
         if(role._id)
-            return this.http.delete(`${environment.apiUrl}user-role/${role._id}`, this.requestOptions).map( extractData );
+            return this.http.delete(`${environment.apiUrl}roles/${role._id}`, this.requestOptions).map( extractData );
     }
 
 }
