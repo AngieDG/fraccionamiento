@@ -1,0 +1,28 @@
+
+@import "src/@fuse/scss/fuse";
+
+.contact-form-dialog {
+
+    .mat-dialog-container {
+        padding: 0;
+        overflow: hidden;
+
+        .mat-toolbar {
+            min-height: initial;
+        }
+
+        .toolbar-bottom {
+            height: auto;
+        }
+    }
+    
+    table {
+        width: 100%;
+    }
+
+    .dialog-content-wrapper {
+        max-height: 85vh;
+        display: flex;
+        flex-direction: column;
+    }
+}
