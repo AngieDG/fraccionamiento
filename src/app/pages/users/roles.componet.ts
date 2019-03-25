@@ -9,6 +9,9 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { LoginService } from 'app/services/auth/login.service';
 import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-bar.service';
+import { UserRoleFormComponent } from './user-role-form/user-role-form.component';
+
+
 
 @Component ({
   selector: 'app-users-roles',
@@ -40,9 +43,9 @@ export class UserRolesPermissionsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-  if(!this.loginService.hasPermission(['user-roles-read'])){
+ // if(!this.loginService.hasPermission(['user-roles-read'])){
       
-  }
+  //}
     this._fuseProgressBarService.show();
     this.rolService.getAll().subscribe((response) => { 
         if(response){
@@ -66,7 +69,7 @@ export class UserRolesPermissionsComponent implements OnInit {
       (error) =>  {
         this.loginService.displayMessage('Ha ocurrido un error al obtener los roles 1');
         this.loginService.goBack();
-        console.log(`Error ${error}`);
+        console.log(`Error ${error}`);     
       }
     );
   }
@@ -78,7 +81,7 @@ export class UserRolesPermissionsComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }  
-  /*
+ 
 
   addNewRole(){
     this.dialogRef = this.dialog.open(UserRoleFormComponent, {
@@ -116,5 +119,5 @@ export class UserRolesPermissionsComponent implements OnInit {
         console.log(`Error: ${error}`);
       }
     );
-  } */
+  } 
 }

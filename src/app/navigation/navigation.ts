@@ -26,7 +26,7 @@ export const navigation: FuseNavigation[] = [
                 title   :'roles',
                 type    :'item',
                 icon   :'verified_user',
-                url     :'/users'
+                url     :'/admin/user/roles'
             }
         ]
     }

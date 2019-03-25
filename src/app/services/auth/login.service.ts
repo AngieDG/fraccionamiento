@@ -82,15 +82,15 @@ export class LoginService {
   }
 
   // Build a permissions tree from current identity
-  _makePermissionsTree(){
+ // _makePermissionsTree(){
 
       // If permissions doesn't exists
-      if(!this._permissions_slugs)
-          return;
-          console.log('HHHHHHHH');      
+   //   if(!this._permissions_slugs)
+     //     return;
+              
 
       // Sort permissions as a tree in a local variable
-      this._permissions_slugs.forEach(element => {
+   /*   this._permissions_slugs.forEach(element => {
           if(element){
               var perm = element.split('-');
               if(!this._permissions[perm[0]])
@@ -102,7 +102,7 @@ export class LoginService {
           }
       });
 
-  }
+  }*/
 
 
   // Make a login request
@@ -142,8 +142,8 @@ export class LoginService {
           (data) => { 
               if(data['valid']){
                   this.setIdentity(data['user']);
-                  this._permissions_slugs = data['_permissions'];
-                  this._makePermissionsTree();
+                  //this._permissions_slugs = data['_permissions'];
+                  //this._makePermissionsTree();
                  // this.get_extra_appdata();
                   return true;
               } else {
@@ -192,7 +192,7 @@ export class LoginService {
 
       // Filter permissions slugs that are in stored in local
       let authorized = to_validate.filter( (el) => {
-          return (this._permissions_slugs.indexOf(el)>-1);
+          //return (this._permissions_slugs.indexOf(el)>-1);
       });
       
       // return true if user has one or more permissions
