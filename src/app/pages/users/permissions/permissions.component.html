@@ -28,10 +28,10 @@
                     <input matInput name="name" required autocomplete="off" placeholder="Nombre de rol" [(ngModel)]="current_role.name">
                 </mat-form-field>
                 <div fxFlex class="text-right">
-                    <button mat-icon-button color="primary" (click)="deleteRole()" *ngIf="">
+                    <button mat-icon-button color="primary" (click)="deleteRole()">
                         <mat-icon>delete</mat-icon>
                     </button>
-                    <button mat-icon-button color="primary" (click)="saveRole()" *ngIf="">
+                    <button mat-icon-button color="primary" (click)="saveRole()">
                         <mat-icon>save</mat-icon>
                     </button>
                 </div>
@@ -40,7 +40,7 @@
             <!-- / CONTENT TOOLBAR -->
 
             <!-- CONTENT -->
-            <div class="content p-24" fusePerfectScrollbar>
+            <div class="content p-38" fusePerfectScrollbar>
 
 
                 <form #roleForm="ngForm" fxLayout="column" fxLayoutAlign="start" *ngIf="current_role">

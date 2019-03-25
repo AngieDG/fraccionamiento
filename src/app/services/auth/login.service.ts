@@ -28,7 +28,7 @@ export class LoginService {
   token: string;
   build: Boolean = false;
   _permissions: any = [];
- // _permissions_slugs: any = [];
+  _permissions_slugs: any = [];
   appData: any = {};
 
     constructor(
@@ -82,7 +82,7 @@ export class LoginService {
   }
 
   // Build a permissions tree from current identity
- // _makePermissionsTree(){
+ _makePermissionsTree(){
 
       // If permissions doesn't exists
    //   if(!this._permissions_slugs)
@@ -90,7 +90,7 @@ export class LoginService {
               
 
       // Sort permissions as a tree in a local variable
-   /*   this._permissions_slugs.forEach(element => {
+    this._permissions_slugs.forEach(element => {
           if(element){
               var perm = element.split('-');
               if(!this._permissions[perm[0]])
@@ -102,7 +102,7 @@ export class LoginService {
           }
       });
 
-  }*/
+  }
 
 
   // Make a login request
@@ -142,9 +142,9 @@ export class LoginService {
           (data) => { 
               if(data['valid']){
                   this.setIdentity(data['user']);
-                  //this._permissions_slugs = data['_permissions'];
-                  //this._makePermissionsTree();
-                 // this.get_extra_appdata();
+                  this._permissions_slugs = data['_permissions'];
+                  this._makePermissionsTree();
+                 
                   return true;
               } else {
                   this.doLogout();

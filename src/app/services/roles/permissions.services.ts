@@ -16,7 +16,7 @@ export class PermissionsService {
     }
 
     getAll(): Observable<Permission[]> {
-        return this.http.get(`${environment.apiUrl}user-permission`, this.requestOptions)
+        return this.http.get(`${environment.apiUrl}permissions`, this.requestOptions)
             .map( mapPermissions );
     }
     
