@@ -40,12 +40,12 @@
             <!-- / CONTENT TOOLBAR -->
 
             <!-- CONTENT -->
-            <div class="content p-38" fusePerfectScrollbar>
+            <div class="content p-24" fusePerfectScrollbar>
 
 
                 <form #roleForm="ngForm" fxLayout="column" fxLayoutAlign="start" *ngIf="current_role">
                     <div fxLayout="row wrap" fxLayoutGap="10px">
-                        <div *ngFor="let per of permissions;  index as i" fxFlex="200px">
+                        <div *ngFor="let per of permissions;  index as i" fxFlex="292px">
                             <mat-checkbox [checked]="(current_role._permissions.indexOf(per._id)>=0) " (change)="addOrRemovePermission($event.checked,per._id)"><span class="mat-body-2">{{per.name}}</span></mat-checkbox>
                         </div>
                     </div>
